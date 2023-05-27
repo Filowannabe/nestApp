@@ -15,6 +15,8 @@ export class CreateProductDto {
   @IsNumber()
   inventoryQuantity: number;
 
+  inventoryUpdatedTime = new Date();
+
   @IsUUID()
   storeId: string;
 }

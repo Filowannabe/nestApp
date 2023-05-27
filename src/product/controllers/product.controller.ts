@@ -8,7 +8,10 @@ import {
   Patch,
   Post,
   Query,
+  Res,
 } from '@nestjs/common';
+import { Response } from 'express';
+import { HttpResponse } from 'src/shared/HttpResponse';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { ProductService } from '../services/product.service';
 
@@ -17,30 +20,39 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Post()
-  async create(@Body() createProductDto: CreateProductDto) {
-    return await this.productService.create(createProductDto);
+  async create(
+    @Res() response: Response,
+    @Body() createProductDto: CreateProductDto,
+  ) {
+    const httpResponse = await this.productService.create(createProductDto);
+    HttpResponse.convertToExpress(response, httpResponse);
   }
 
   @Get()
-  async findAll() {
-    return await this.productService.fetchAll();
+  async findAll(@Res() response: Response) {
+    const httpResponse = await this.productService.fetchAll();
+    HttpResponse.convertToExpress(response, httpResponse);
   }
 
   @Get(':id')
   async fetchById(
+    @Res() response: Response,
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ) {
-    return await this.productService.fetchById(id);
+    const httpResponse = await this.productService.fetchById(id);
+    HttpResponse.convertToExpress(response, httpResponse);
   }
 
   @Patch(':id')
   async updateInventoryQuantity(
+    @Res() response: Response,
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Query('inventoryQuantity', ParseIntPipe) inventoryQuantity: number,
   ) {
-    return await this.productService.updateInventoryQuantity(
+    const httpResponse = await this.productService.updateInventoryQuantity(
       id,
       inventoryQuantity,
     );
+    HttpResponse.convertToExpress(response, httpResponse);
   }
 }
