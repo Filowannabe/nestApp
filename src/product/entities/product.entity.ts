@@ -1,27 +1,36 @@
-import { Product } from 'src/product/entities/product.entity';
+import { Store } from 'src/store/entities/store.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'stores' })
-export class Store {
+@Entity({ name: 'products' })
+export class Product {
   @PrimaryColumn({ type: 'uuid' })
   id: string;
 
   @Column({ unique: true })
   name: string;
 
-  @Column()
-  url: string;
+  @Column({ unique: true })
+  sku: string;
 
-  @OneToMany(() => Product, (product) => product.store)
-  products?: Product[];
+  @Column()
+  inventoryQuantity: number;
+
+  @Column()
+  inventoryUpdatedTime?: Date;
+
+  @Column()
+  storeId: string;
+
+  @ManyToOne(() => Store, (store) => store.products)
+  store?: Store;
 
   @CreateDateColumn({
     type: 'timestamp',

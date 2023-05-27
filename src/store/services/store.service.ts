@@ -5,11 +5,11 @@ import { StoreRepository } from '../repositories/store.repository';
 export class StoreService {
   constructor(private storeRepository: StoreRepository) {}
 
-  create(createStoreDto: CreateStoreDto) {
-    return this.storeRepository.create(createStoreDto);
+  async create(createStoreDto: CreateStoreDto) {
+    return await this.storeRepository.create(createStoreDto);
   }
 
-  findAll() {
-    return this.storeRepository.fetchAll();
+  async findAll() {
+    return await this.storeRepository.fetchAll();
   }
 }
