@@ -21,6 +21,12 @@ export class StoreRepository implements IStoreRepository {
     });
   }
 
+  async fetchByName(name: string): Promise<Store> {
+    return await this.storeRepository.findOne({
+      where: { name },
+    });
+  }
+
   async fetchAll(): Promise<Store[]> {
     return await this.storeRepository.find();
   }

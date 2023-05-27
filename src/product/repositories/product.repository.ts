@@ -25,6 +25,12 @@ export class ProductRepository implements IProductRepository {
     });
   }
 
+  async fetchByNameAndStoreId(name: string, storeId: string): Promise<Product> {
+    return await this.productRepository.findOne({
+      where: { name, storeId },
+    });
+  }
+
   async updateInventoryQuantity(
     id: string,
     inventoryQuantity: number,

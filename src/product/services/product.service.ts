@@ -7,6 +7,17 @@ export class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
   async create(createProductDto: CreateProductDto): Promise<HttpResponse> {
+    const { name, storeId } = createProductDto;
+    const productToFind = await this.productRepository.fetchByNameAndStoreId(
+      name,
+      storeId,
+    );
+
+    if (productToFind) {
+      return HttpResponse.create(HttpStatus.PRECONDITION_FAILED, {
+        message: 'Product already exists',
+      });
+    }
     await this.productRepository.create(createProductDto);
     return HttpResponse.create(HttpStatus.OK, { message: 'Product created' });
   }
@@ -18,6 +29,11 @@ export class ProductService {
 
   async fetchById(id: string): Promise<HttpResponse> {
     const product = await this.productRepository.fetchById(id);
+    if (!product) {
+      return HttpResponse.create(HttpStatus.NOT_FOUND, {
+        message: 'Product does not exits',
+      });
+    }
     return HttpResponse.create(HttpStatus.OK, product);
   }
 
@@ -25,6 +41,12 @@ export class ProductService {
     id: string,
     inventoryQuantity: number,
   ): Promise<HttpResponse> {
+    const productToFind = await this.productRepository.fetchById(id);
+    if (!productToFind) {
+      return HttpResponse.create(HttpStatus.NOT_FOUND, {
+        message: 'Product does not exits',
+      });
+    }
     const product = await this.productRepository.updateInventoryQuantity(
       id,
       inventoryQuantity,
