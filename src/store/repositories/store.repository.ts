@@ -38,6 +38,10 @@ export class StoreRepository implements IStoreRepository {
         },
       });
     }
-    return await this.storeRepository.find();
+    return await this.storeRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 }
