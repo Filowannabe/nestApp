@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { HttpResponse } from 'src/shared/HttpResponse';
 import { CreateStoreDto } from '../dto/create-store.dto';
@@ -18,8 +18,8 @@ export class StoreController {
   }
 
   @Get()
-  async findAll(@Res() response: Response) {
-    const httpResponse = await this.storeService.findAll();
+  async findAll(@Res() response: Response, @Query('search') search: string) {
+    const httpResponse = await this.storeService.findAll(search);
     HttpResponse.convertToExpress(response, httpResponse);
   }
 }

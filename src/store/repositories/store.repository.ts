@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Store } from '../entities/store.entity';
 import { IStoreRepository } from './store.reposotory.interface';
 
@@ -27,7 +27,14 @@ export class StoreRepository implements IStoreRepository {
     });
   }
 
-  async fetchAll(): Promise<Store[]> {
+  async fetchAll(search: string): Promise<Store[]> {
+    if (search) {
+      return await this.storeRepository.find({
+        where: {
+          name: Like(`%${search}%`),
+        },
+      });
+    }
     return await this.storeRepository.find();
   }
 }

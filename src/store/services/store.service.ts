@@ -20,8 +20,8 @@ export class StoreService {
     return HttpResponse.create(HttpStatus.OK, { message: 'Store created' });
   }
 
-  async findAll(): Promise<HttpResponse> {
-    const allStores = await this.storeRepository.fetchAll();
+  async findAll(search: string): Promise<HttpResponse> {
+    const allStores = await this.storeRepository.fetchAll(search);
     return HttpResponse.create(HttpStatus.OK, allStores);
   }
 }
