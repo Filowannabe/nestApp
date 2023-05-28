@@ -71,3 +71,44 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Heroku environment
+> REST requests:
+POST
+* **Create store**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/stores
+
+``` JSON
+{
+    "name": "Amazon",
+    "url": "http://Disney.com"
+}
+```
+GET
+* **Fetch all stores**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/stores
+---
+GET
+* **Fetch all products**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/products
+---
+
+GET
+* **Fetch product by id**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/products/{Valid product Id}
+---
+POST
+* **Create product**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/products
+
+``` JSON
+{
+    "name": "Product name",
+    "sku": "Product sku",
+    "inventoryQuantity": 0,
+    "storeId": "Valid store Id"
+}
+```
+PARCH
+* **Update Inventory of Product**
+    * https://nestapp-production-7b97.up.railway.app/api/v1/products/{Valid product Id}?inventoryQuantity={Quantity number}
