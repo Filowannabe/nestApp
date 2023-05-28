@@ -4,7 +4,7 @@ import { HttpResponse } from 'src/shared/HttpResponse';
 import { CreateStoreDto } from '../dto/create-store.dto';
 import { StoreService } from '../services/store.service';
 
-@Controller('store')
+@Controller('stores')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
