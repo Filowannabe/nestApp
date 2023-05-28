@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import dotenv from './config/Dotenv';
 import { Product } from './product/entities/product.entity';
 import { ProductModule } from './product/product.module';
 import { Store } from './store/entities/store.entity';
 import { StoreModule } from './store/store.module';
+dotenv.config();
 
 @Module({
   imports: [

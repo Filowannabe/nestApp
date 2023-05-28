@@ -20,7 +20,7 @@ export class Store {
   @Column()
   url: string;
 
-  @OneToMany(() => Product, (product) => product.store)
+  @OneToMany(() => Product, (product) => product.store, { eager: true })
   products?: Product[];
 
   @CreateDateColumn({
