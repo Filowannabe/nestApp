@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsUUID, MinLength } from 'class-validator';
+import { IsDate, IsNumber, IsString, IsUUID, MinLength } from 'class-validator';
 import { v4 as uuidV4 } from 'uuid';
 export class CreateProductDto {
   @IsUUID()
@@ -15,6 +15,7 @@ export class CreateProductDto {
   @IsNumber()
   inventoryQuantity: number;
 
+  @IsDate()
   inventoryUpdatedTime = new Date();
 
   @IsUUID()

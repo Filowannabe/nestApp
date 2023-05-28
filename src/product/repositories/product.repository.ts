@@ -16,7 +16,11 @@ export class ProductRepository implements IProductRepository {
   }
 
   async fetchAll(): Promise<Product[]> {
-    return await this.productRepository.find();
+    return await this.productRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   async fetchById(id: string): Promise<Product> {

@@ -33,6 +33,9 @@ export class StoreRepository implements IStoreRepository {
         where: {
           name: Like(`%${search}%`),
         },
+        order: {
+          createdAt: 'DESC',
+        },
       });
     }
     return await this.storeRepository.find();
