@@ -16,11 +16,10 @@ export class ProductRepository implements IProductRepository {
   }
 
   async fetchAll(): Promise<Product[]> {
-    return await this.productRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-    });
+    return await this.productRepository
+      .createQueryBuilder('products')
+      .leftJoinAndSelect('products.store', 'store')
+      .getMany();
   }
 
   async fetchById(id: string): Promise<Product> {
