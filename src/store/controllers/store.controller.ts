@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { HttpResponse } from 'src/shared/HttpResponse';
+import { HttpResponse } from '../../shared/HttpResponse';
 import { CreateStoreDto } from '../dto/create-store.dto';
 import { StoreService } from '../services/store.service';
 

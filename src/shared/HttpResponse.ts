@@ -1,4 +1,3 @@
-
 export class HttpResponse {
   public statusCode: number;
   public body: object;

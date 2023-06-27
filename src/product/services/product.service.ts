@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { HttpResponse } from 'src/shared/HttpResponse';
-import HttpStatusCode from 'src/shared/HttpStatusCode';
-import { StoreRepository } from 'src/store/repositories/store.repository';
+import { HttpResponse } from '../../shared/HttpResponse';
+import HttpStatusCode from '../../shared/HttpStatusCode';
+import { StoreRepository } from '../../store/repositories/store.repository';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { ProductRepository } from '../repositories/product.repository';
 @Injectable()

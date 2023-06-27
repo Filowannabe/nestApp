@@ -11,7 +11,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { HttpResponse } from 'src/shared/HttpResponse';
+import { HttpResponse } from '../../shared/HttpResponse';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { ProductService } from '../services/product.service';
 
