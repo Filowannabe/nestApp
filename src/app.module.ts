@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CommonModule } from './common/common.module';
 import dotenv from './config/Dotenv';
 import { Product } from './product/entities/product.entity';
 import { ProductModule } from './product/product.module';
 import { Store } from './store/entities/store.entity';
 import { StoreModule } from './store/store.module';
 dotenv.config();
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -18,10 +18,11 @@ dotenv.config();
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [Store, Product],
-      synchronize: true,
+      synchronize: false,
     }),
     StoreModule,
     ProductModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],

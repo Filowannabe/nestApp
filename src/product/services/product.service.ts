@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { HttpResponse } from '../../shared/HttpResponse';
-import HttpStatusCode from '../../shared/HttpStatusCode';
+import { HttpResponse } from '../../common/HttpResponse';
+import HttpStatusCode from '../../common/HttpStatusCode';
 import { StoreRepository } from '../../store/repositories/store.repository';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { ProductRepository } from '../repositories/product.repository';
