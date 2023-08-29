@@ -1,4 +1,9 @@
-import { DeepPartial, FindOneOptions, Repository } from 'typeorm';
+import {
+  DeepPartial,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { BaseInterfaceRepository } from './base.interface.repository';
 
 interface HasId {
@@ -11,15 +16,45 @@ export abstract class BaseAbstractRepository<T extends HasId>
   constructor(entity: Repository<T>) {
     this.entity = entity;
   }
-  async create(data: DeepPartial<T>): Promise<T> {
+
+  async save(data: DeepPartial<T>): Promise<T> {
     return await this.entity.save(data);
   }
 
-  async fetchById(id: any): Promise<T> {
+  async saveMany(data: DeepPartial<T>[]): Promise<T[]> {
+    return await this.entity.save(data);
+  }
+
+  create(data: DeepPartial<T>): T {
+    return this.entity.create(data);
+  }
+  createMany(data: DeepPartial<T>[]): T[] {
+    return this.entity.create(data);
+  }
+
+  async findOneById(id: any): Promise<T> {
     const options: FindOneOptions<T> = {
       where: { id },
     };
 
     return await this.entity.findOne(options);
+  }
+
+  async findOneByCondition(filterCondition: FindOneOptions<T>): Promise<T> {
+    return await this.entity.findOne(filterCondition);
+  }
+
+  async findWithRelations(relations: FindManyOptions<T>): Promise<T[]> {
+    return await this.entity.find(relations);
+  }
+
+  async findAll(options?: FindManyOptions<T>): Promise<T[]> {
+    return await this.entity.find(options);
+  }
+  async remove(data: T): Promise<T> {
+    return await this.entity.remove(data);
+  }
+  async preload(entityLike: DeepPartial<T>): Promise<T> {
+    return await this.entity.preload(entityLike);
   }
 }

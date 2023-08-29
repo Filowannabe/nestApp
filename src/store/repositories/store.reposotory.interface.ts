@@ -1,6 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { BaseInterfaceRepository } from '../../common/repository/base.interface.repository';
 import { Store } from '../entities/store.entity';
 
-export interface IStoreRepository {
-  create(createEntityData: Store);
-  fetchAll(search: string): Promise<Store[]>;
-}
+export interface IStoreRepository extends BaseInterfaceRepository<Store> {}

@@ -19,7 +19,7 @@ export class ProductService {
         storeId,
       );
 
-      const storeToFind = await this.storeRepository.fetchById(storeId);
+      const storeToFind = await this.storeRepository.findOneById(storeId);
       if (!storeToFind) {
         return HttpResponse.create(HttpStatus.NOT_FOUND, {
           message: 'Store does not exists.',
@@ -54,7 +54,7 @@ export class ProductService {
 
   async fetchById(id: string): Promise<HttpResponse> {
     try {
-      const product = await this.productRepository.fetchById(id);
+      const product = await this.productRepository.findOneById(id);
       if (!product) {
         return HttpResponse.create(HttpStatus.NOT_FOUND, {
           message: 'Product does not exits',
@@ -74,7 +74,7 @@ export class ProductService {
     inventoryQuantity: number,
   ): Promise<HttpResponse> {
     try {
-      const productToFind = await this.productRepository.fetchById(id);
+      const productToFind = await this.productRepository.findOneById(id);
       if (!productToFind) {
         return HttpResponse.create(HttpStatus.NOT_FOUND, {
           message: 'Product does not exits',

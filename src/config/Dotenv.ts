@@ -4,5 +4,5 @@ import * as path from 'path';
 const configPath = path.join(__dirname, '../../.env');
 
 export default {
-	config: () => dotenv.config({ path: configPath }),
+  config: () => dotenv.config({ path: configPath }),
 };
