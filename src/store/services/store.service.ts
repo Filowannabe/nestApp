@@ -1,9 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { FindManyOptions, Like } from 'typeorm';
 import { HttpResponse } from '../../common/HttpResponse';
 import HttpStatusCode from '../../common/HttpStatusCode';
 import { CreateStoreDto } from '../dto/create-store.dto';
-import { Store } from '../entities/store.entity';
 import { StoreRepository } from '../repositories/store.repository';
 @Injectable()
 export class StoreService {
@@ -32,21 +30,7 @@ export class StoreService {
 
   async findAll(search: string): Promise<HttpResponse> {
     try {
-      let allStores: Store[];
-      let options: FindManyOptions<Store> = {
-        order: {
-          createdAt: 'DESC',
-        },
-      };
-
-      if (search) {
-        options = {
-          where: {
-            name: Like(`%${search}%`),
-          },
-        };
-        allStores = await this.storeRepository.findAll(options);
-      }
+      const allStores = await this.storeRepository.findAllMiddleware(search);
 
       return HttpResponse.create(HttpStatus.OK, allStores);
     } catch (error) {
