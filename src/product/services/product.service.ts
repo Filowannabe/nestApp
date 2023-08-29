@@ -42,7 +42,8 @@ export class ProductService {
 
   async fetchAll(): Promise<HttpResponse> {
     try {
-      const allProducts = await this.productRepository.fetchAll();
+      const allProducts =
+        await this.productRepository.fetchAllLeftJoinProducts();
       return HttpResponse.create(HttpStatus.OK, allProducts);
     } catch (error) {
       return HttpResponse.create(HttpStatusCode.ERROR, {

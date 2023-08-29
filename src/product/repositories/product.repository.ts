@@ -17,7 +17,7 @@ export class ProductRepository
     super(productRepository);
   }
 
-  async fetchAll(): Promise<Product[]> {
+  async fetchAllLeftJoinProducts(): Promise<Product[]> {
     return await this.productRepository
       .createQueryBuilder('products')
       .leftJoinAndSelect('products.store', 'store')
